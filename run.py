@@ -33,9 +33,17 @@ def new_game():
 
     size = 8
     num_ships = 5
-    print("." * 35)
-    print("Welcome to Battleships Game!")
-    print("." * 35)
+    print ("""                                     # #  ( )
+                                  ___#_#___|__
+                              _  |____________|  _
+                       _=====| | |            | | |==== _
+                 =====| |.---------------------------. | |====
+   <--------------------'   .  .  .  .  .  .  .  .   '--------------/
+     \             Welcome to Battleships Game!                     /
+      \____________________________________________________________/
+  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww """
     print("Board size: {size}. Number of ships: {ships} ")
     print("Your board:")
     player_board.display(reveal=True)
