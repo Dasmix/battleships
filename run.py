@@ -37,6 +37,22 @@ class Board:
             self.board[x][y] = "[*]"
             return "Miss!"
 
+    def player_turn(computer_board, size):
+    try:
+        print("Your turn:")
+        shot_x = int(input("Enter the row (0-7) to take a shot: "))
+        shot_y = int(input("Enter the column (0-7) to take a shot: "))
+        if 0 <= shot_x < size and 0 <= shot_y < size:
+            result = computer_board.take_shot(shot_x, shot_y)
+            print(f"You {result}")
+            print("Computer's board:")
+            computer_board.display()
+        else:
+            print("Invalid coordinates. Please enter values between 0 and 7.")
+            player_turn(computer_board, size)  
+    except ValueError:
+        print("Invalid input. Please enter integer values.")
+        player_turn(computer_board, size)  
 
 def new_game():
 
