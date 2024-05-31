@@ -19,7 +19,15 @@ class Board:
             if (x, y) not in ships:
                 ships.append((x, y))
         return ships
-        
+
+    def display(self, reveal=False):
+        display_board = [row[:] for row in self.board]
+        if reveal:
+            for (x, y) in self.ships:
+                display_board[x][y] = "[O]"
+        for row in display_board:
+            print(" ".join(row))
+
 
 def new_game():
 
@@ -29,3 +37,7 @@ def new_game():
     print("Welcome to Battleships Game!")
     print("." * 35)
     print("Board size: {size}. Number of ships: {ships} ")
+    print("Your board:")
+    player_board.display(reveal=True)
+    print("Computer board:")
+    computer_board.display()
