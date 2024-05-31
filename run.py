@@ -28,6 +28,15 @@ class Board:
         for row in display_board:
             print(" ".join(row))
 
+    def take_shot(self, x, y):
+        if (x, y) in self.ships:
+            self.board[x][y] = "[X]"
+            self.ships.remove((x, y))
+            return "Hit!"
+        else:
+            self.board[x][y] = "[*]"
+            return "Miss!"
+
 
 def new_game():
 
