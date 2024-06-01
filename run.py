@@ -11,7 +11,9 @@ class Board:
         self.ships = []
 
     def place_ships(self):
-    
+        """
+        Randomly place ships on the board.
+        """
         ships = []
         while len(ships) < self.num_ships:
             x = random.randint(0, self.size - 1)
@@ -21,6 +23,9 @@ class Board:
         return ships
 
     def display(self, reveal=False):
+        """
+        Display the board.
+        """
         display_board = [row[:] for row in self.board]
         if reveal:
             for (x, y) in self.ships:
@@ -29,6 +34,9 @@ class Board:
             print(" ".join(row))
 
     def take_shot(self, x, y):
+        """
+        Process a shot at the specified coordinates.
+        """
         if (x, y) in self.ships:
             self.board[x][y] = "[X]"
             self.ships.remove((x, y))
@@ -38,6 +46,9 @@ class Board:
             return "Miss!"
 
     def player_turn(computer_board, size):
+        """
+        Handle the player's turn to take a shot at the computer's board.
+        """
     try:
         print("Your turn:")
         shot_x = int(input("Enter the row (0-7) to take a shot: "))
@@ -55,6 +66,9 @@ class Board:
         player_turn(computer_board, size)  
 
     def computer_turn(player_board, size):
+        """
+        Handle the computer's turn to take a shot at the player's board.
+        """
     print("Computer's turn:")
     while True:
         comp_shot_x = random.randint(0, size - 1)
@@ -67,11 +81,17 @@ class Board:
     print("Your board:")
     player_board.display(reveal=True)
 
-def new_game():
+    def new_game():
+        """
+        Start a new game with default board size and number of ships.
+        """
 
     size = 8
     num_ships = 5
-    print ("""                                     # #  ( )
+    """
+    Print a welcome message and display initial game setup information.
+    """
+     print ("""                                     # #  ( )
                                   ___#_#___|__
                               _  |____________|  _
                        _=====| | |            | | |==== _
@@ -87,7 +107,10 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
     player_board.display(reveal=True)
     print("Computer board:")
     computer_board.display()
+    """
+    Execute the game loop where player and computer take turns until one side loses all ships. Print appropriate messages based on the outcome.
 
+    """
      while player_board.ships and computer_board.ships:
         player_turn(computer_board, size)
         if not computer_board.ships:
@@ -100,3 +123,4 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
         print("Game over. The computer sunk all your ships.")
 
 
+new_game()
