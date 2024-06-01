@@ -54,6 +54,19 @@ class Board:
         print("Invalid input. Please enter integer values.")
         player_turn(computer_board, size)  
 
+    def computer_turn(player_board, size):
+    print("Computer's turn:")
+    while True:
+        comp_shot_x = random.randint(0, size - 1)
+        comp_shot_y = random.randint(0, size - 1)
+        if (comp_shot_x, comp_shot_y) not in player_board.guesses:
+            player_board.guesses.append((comp_shot_x, comp_shot_y))
+            break
+    result = player_board.take_shot(comp_shot_x, comp_shot_y)
+    print(f"Computer shot at ({comp_shot_x}, {comp_shot_y}) and {result}")
+    print("Your board:")
+    player_board.display(reveal=True)
+
 def new_game():
 
     size = 8
