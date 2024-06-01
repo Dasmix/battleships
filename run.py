@@ -1,5 +1,6 @@
 import random
 
+
 class Board:
 
     def __init__(self, size, num_ships):
@@ -56,7 +57,7 @@ class Board:
                 if (shot_x, shot_y) in self.guesses:
                     print("You've already shot that position. Please choose another.")
                 elif 0 <= shot_x < self.size and 0 <= shot_y < self.size:
-                    self.guesses.add((shot_x, shot_y)) 
+                    self.guesses.add((shot_x, shot_y))
                     result = computer_board.take_shot(shot_x, shot_y)
                     print(f"You {result}")
                     print("Computer's board:")
@@ -128,5 +129,6 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
         print("Congratulations! You've sunk all the computer's ships.")
     else:
         print("Game over. The computer sunk all your ships.")
+
 
 new_game()
