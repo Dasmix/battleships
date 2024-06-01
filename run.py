@@ -1,9 +1,9 @@
 import random
 
+
 class Board:
 
     def __init__(self, size, ships_num):
-        
         self.size = size
         self.board = [["[~]" for x in range(size)] for y in range(size)]
         self.num_ships = num_ships
@@ -60,10 +60,10 @@ class Board:
             computer_board.display()
         else:
             print("Invalid coordinates. Please enter values between 0 and 7.")
-            player_turn(computer_board, size)  
+            player_turn(computer_board, size)
     except ValueError:
         print("Invalid input. Please enter integer values.")
-        player_turn(computer_board, size)  
+        player_turn(computer_board, size)
 
     def computer_turn(player_board, size):
         """
@@ -91,7 +91,7 @@ class Board:
     """
     Print a welcome message and display initial game setup information.
     """
-     print ("""                                     # #  ( )
+     print("""                       # #  ( )
                                   ___#_#___|__
                               _  |____________|  _
                        _=====| | |            | | |==== _
@@ -101,17 +101,18 @@ class Board:
       \____________________________________________________________/
   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww """
+   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww """)
     print("Board size: {size}. Number of ships: {ships} ")
     print("Your board:")
     player_board.display(reveal=True)
     print("Computer board:")
     computer_board.display()
     """
-    Execute the game loop where player and computer take turns until one side loses all ships. Print appropriate messages based on the outcome.
+    Execute the game loop where player and computer take turns until one side
+    loses all ships.Print appropriate messages based on the outcome.
 
     """
-     while player_board.ships and computer_board.ships:
+    while player_board.ships and computer_board.ships:
         player_turn(computer_board, size)
         if not computer_board.ships:
             break
