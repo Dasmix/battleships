@@ -1,13 +1,12 @@
 import random
 
-
 class Board:
 
     def __init__(self, size, num_ships):
         self.size = size
         self.board = [["[~]" for _ in range(size)] for _ in range(size)]
         self.num_ships = num_ships
-        self.guesses = []
+        self.guesses = set()
         self.ships = self.place_ships()
 
     def place_ships(self):
@@ -45,37 +44,39 @@ class Board:
             self.board[x][y] = "[*]"
             return "Miss!"
 
-    def player_turn(self, computer_board, size):
+    def player_turn(self, computer_board):
         """
         Handle the player's turn to take a shot at the computer's board.
         """
         try:
             print("Your turn:")
-            shot_x = int(input(f"Enter the row (0-{size - 1}) to take a shot: "))
-            shot_y = int(input(f"Enter the column (0-{size - 1}) to take a shot: "))
-            if 0 <= shot_x < size and 0 <= shot_y < size:
-                result = computer_board.take_shot(shot_x, shot_y)
-                print(f"You {result}")
-                print("Computer's board:")
-                computer_board.display()
-            else:
-                print(f"Invalid coordinates. Please enter values between 0 and {size-1}.")
-                return False
+            while True:
+                shot_x = int(input(f"Enter the row (0-{self.size - 1}) to take a shot: "))
+                shot_y = int(input(f"Enter the column (0-{self.size - 1}) to take a shot: "))
+                if (shot_x, shot_y) in self.guesses:
+                    print("You've already shot that position. Please choose another.")
+                elif 0 <= shot_x < self.size and 0 <= shot_y < self.size:
+                    self.guesses.add((shot_x, shot_y)) 
+                    result = computer_board.take_shot(shot_x, shot_y)
+                    print(f"You {result}")
+                    print("Computer's board:")
+                    computer_board.display()
+                    break
+                else:
+                    print(f"Invalid coordinates. Please enter values between 0 and {self.size-1}.")
         except ValueError:
             print("Invalid input. Please enter integer values.")
-            return False
-        return True
 
-    def computer_turn(self, player_board, size):
+    def computer_turn(self, player_board):
         """
         Handle the computer's turn to take a shot at the player's board.
         """
         print("Computer's turn:")
         while True:
-            comp_shot_x = random.randint(0, size - 1)
-            comp_shot_y = random.randint(0, size - 1)
+            comp_shot_x = random.randint(0, self.size - 1)
+            comp_shot_y = random.randint(0, self.size - 1)
             if (comp_shot_x, comp_shot_y) not in player_board.guesses:
-                player_board.guesses.append((comp_shot_x, comp_shot_y))
+                player_board.guesses.add((comp_shot_x, comp_shot_y))
                 break
         result = player_board.take_shot(comp_shot_x, comp_shot_y)
         print(f"Computer shot at ({comp_shot_x}, {comp_shot_y}) and {result}")
@@ -106,8 +107,8 @@ def new_game():
       \____________________________________________________________ /
   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-    """
+   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+        """
     )
     print(f"Board size: {size}. Number of ships: {num_ships} ")
     print("Your board:")
@@ -116,17 +117,16 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
     computer_board.display()
     """
     Execute the game loop where player and computer take turns until one side
-    loses all ships.Print appropriate messages based on the outcome.
+    loses all ships. Print appropriate messages based on the outcome.
     """
     while player_board.ships and computer_board.ships:
-        if player_board.player_turn(computer_board, size):
-            if not computer_board.ships:
-                break
-            computer_board.computer_turn(player_board, size)
+        player_board.player_turn(computer_board)
+        if not computer_board.ships:
+            break
+        computer_board.computer_turn(player_board)
     if not computer_board.ships:
         print("Congratulations! You've sunk all the computer's ships.")
     else:
         print("Game over. The computer sunk all your ships.")
-
 
 new_game()
