@@ -91,7 +91,8 @@ class Board:
     """
     Print a welcome message and display initial game setup information.
     """
-     print("""                       # #  ( )
+    print("""
+                                     # #  ( )
                                   ___#_#___|__
                               _  |____________|  _
                        _=====| | |            | | |==== _
