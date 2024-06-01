@@ -87,3 +87,16 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
     player_board.display(reveal=True)
     print("Computer board:")
     computer_board.display()
+
+     while player_board.ships and computer_board.ships:
+        player_turn(computer_board, size)
+        if not computer_board.ships:
+            break
+        computer_turn(player_board, size)
+
+    if not computer_board.ships:
+        print("Congratulations! You've sunk all the computer's ships.")
+    else:
+        print("Game over. The computer sunk all your ships.")
+
+
