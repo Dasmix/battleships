@@ -1,14 +1,21 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome,
+# Battleships
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+Battleships is a Python terminal game, which runs in the Code Institute mock terminal on Heroku
+Users can try to beat the computer by finding all of the computer's battleships before the computer finds theirs. Each
+battleship occupies one square on the board.
 
-## Reminders
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+
+## How to play
+
+Battleships is based on the classic pen-and-paper game. You can read more about ił on Wikipedia.
+In this version, the player enters their name and two boards are randomly generated.
+The player can see where their ships are, indicated by an @ sign, but cannot see where the computer's ships are.
+Guesses are marked on the board with an x . Hits are indicated by
+The player and the computer then take ił in turns to make guesses and try to Sink each other's battleships.
+The winner is the player who sinks all of their opponenťs battleships first.
 
 ## Creating the Heroku app
 
